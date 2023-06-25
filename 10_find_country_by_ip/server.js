@@ -47,10 +47,15 @@ app.get("/ip", (req, res) => {
 });
 
 function ipToNumber(ip) {
-  return ip
-    .split(".")
+  const data = ip
+    .split('.')
     .reduce((acc, octet) => (acc << 8) + parseInt(octet, 10), 0);
+  
+  const ipNumber = data >>> 0; // Use unsigned right shift to convert to unsigned 32-bit integer
+  
+  return ipNumber;
 }
+
 
 const port = 3000;
 app.listen(port, () => {
